@@ -100,3 +100,82 @@ console.log("Welcome", "to", 30, "Days", "Of", "JavaScript");
   JavaScript is the language of the web  
   */
   ```
+
+## 各種可能的錯誤
+
+剛開始學習任何新事物時，會害怕犯錯、看到錯誤訊息，然後學習程式語言注定會是一場與錯誤相伴的旅程，遇到錯誤時，更重要的是需要知道哪裡出錯，以及如何解決錯誤，越是深入學習，越能感受到錯誤其實不可怕，最可怕的是「明明出錯了，但程式卻不知道哪裡錯了」，這種錯誤才叫人難以解決。
+
+而且工程師其實是個非常貼心的生物，如果有哪邊出了錯，也會盡可能透過**錯誤訊息**告訴我們哪裡出錯了，甚至還會提供我們如何解決錯誤的方式。
+
+讓我們逐行執行下列的程式碼，看看會得到哪些訊息：
+
+```js
+console.log("Hello, World!')
+// Uncaught SyntaxError: Invalid or unexpected token
+// 解決方式：應該要使用成對的單引號或是成對的雙引號夾住字串，不應該混用。
+
+console.log('Hello, World!)
+// Uncaught SyntaxError: Invalid or unexpected token
+// 解決方式：開頭使用了單引號，結尾也應該使用單引號包覆住字串
+
+console.log('Hello, World!'
+// Uncaught SyntaxError: missing ) after argument list
+// 解決方式：應該要用 ) 關閉 console.log 的函式
+```
+
+## 數學運算
+
+我們也可以使用 JavaScript 進行數學運算，然後透過 `console.log()` 印出計算的結果：
+
+```js
+console.log(2 + 3); // 加法
+console.log(3 - 2); // 減法
+console.log(2 * 3); // 乘法
+console.log(3 / 2); // 除法
+console.log(3 % 2); // 取得餘數
+console.log(3 ** 2); // 指數，也就是次方
+```
+
+## 開始使用程式碼編輯器（code editor）
+
+雖然我們可以在瀏覽器的 Console 中編寫 JavaScript 程式碼，但這並不適合大型專案。在實際的專案中，工程師們通常使用不同的程式碼編輯器來編寫程式碼，而在這次的系列文章中，我們將使用微軟的 Visual Studio Code，如果自己有習慣的編輯器，也是可以使用的！
+
+### 安裝 Visual Studio Code
+
+Visual Studio Code 是一款非常受歡迎的開源文字編輯器，如果還沒有安裝的話，可以從 [Visual Studio Code](https://code.visualstudio.com/) 官方網站下載並安裝。
+
+在完成安裝 Visual Studio Code 後，也請至 Extension 的頁籤內搜尋 **Live Server** 並安裝，之後會需要使用 Live Server 來預覽我們所創造出來的網頁畫面。
+
+## 如何在網頁程式碼裡面使用 JavaScript
+
+基本上 JavaScript 可以透過幾種方式放入網頁之中，由於中文翻譯起來容易詞不達意，這邊我們用英文進行分類：
+
+- Inline script
+- Internal script
+- External script
+- Multiple External scripts
+
+### Inline Script
+
+首先我們先創造一個名為 `index.html` 的檔案，並且在頁面內輸入以下 HTML 原始碼：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>30DaysOfScript:Inline Script</title>
+  </head>
+
+  <body>
+    <button onclick="alert('Welcome to 30DaysOfJavaScript!')">Click Me</button>
+  </body>
+</html>
+```
+
+可以先透過 VS Code 的 Live Server 來預覽一下這個網頁，會在網頁上看到一個 `Click Me` 的按鈕，按下去之後會跳出一個警示文字 `Welcome to 30DaysOfJavaScript`。
+
+![screenshot_button](./images/Screenshot%202024-10-15%20at%209.14.03 PM.png)
+
+在這個程式碼中，我們使用了 `<button>` 標籤創造了一個按鈕，並且使用 `onclick` 屬性監聽按鈕的點擊事件，在點擊那個按鈕後，會觸發 `alert('Welcome to 30DaysOfJavaScript!')` 這個 JavaScript 函式。
+
+這邊的 `alert()` 是一個 JavaScript 的內建函式，在執行這個函式後，會跳出一個彈出式（pop-up）的訊息，而訊息的內容則會是我們剛剛寫的 `'Welcome to 30DaysOfJavaScript!'`。
