@@ -157,7 +157,7 @@ Visual Studio Code 是一款非常受歡迎的開源文字編輯器，如果還�
 
 ### Inline Script
 
-首先我們先創造一個名為 `index.html` 的檔案，並且在頁面內輸入以下 HTML 原始碼：
+首先我們先創造一個名為 `inline-script.html` 的檔案，並且在頁面內輸入以下 HTML 原始碼：
 
 ```html
 <!DOCTYPE html>
@@ -179,3 +179,197 @@ Visual Studio Code 是一款非常受歡迎的開源文字編輯器，如果還�
 在這個程式碼中，我們使用了 `<button>` 標籤創造了一個按鈕，並且使用 `onclick` 屬性監聽按鈕的點擊事件，在點擊那個按鈕後，會觸發 `alert('Welcome to 30DaysOfJavaScript!')` 這個 JavaScript 函式。
 
 這邊的 `alert()` 是一個 JavaScript 的內建函式，在執行這個函式後，會跳出一個彈出式（pop-up）的訊息，而訊息的內容則會是我們剛剛寫的 `'Welcome to 30DaysOfJavaScript!'`。
+
+### Internal Script
+
+如果我們把 JavaScript 直接寫在 HTML 檔案內的 `<script>` 標籤內，一般來說會將 `<script>` 放在 HTML 裡的 `<head>` 或是 `<body>` 標籤內，而這種作法稱為 **Internal Script**。
+
+讓我們再新建一個 `internal-script.html` 檔案，並且在檔案內加入下方原始碼：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>30DaysOfScript:Internal Script</title>
+    <script>
+      console.log("Welcome to 30DaysOfJavaScript");
+    </script>
+  </head>
+  <body></body>
+</html>
+```
+
+當我們用 Live Server 預覽頁面時，會發現頁面裡雖然一片空白，但使用 `F12` 並打開 Console 後，會發現上面出現了一行，因為 `console.log()` 而印出的 `Welcome to 30DaysOfJavaScript` 字串。
+
+剛剛範例示範了如何在 `<head>` 標籤裡使用 JavaScript，接下來我們也可以試試看如何在 `<body>` 標籤裡使用 JavaScript，讓我們修改一下剛才的 HTML 原始碼：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>30DaysOfScript:Internal Script</title>
+  </head>
+  <body>
+    <script>
+      console.log("Hello world!");
+    </script>
+  </body>
+</html>
+```
+
+同樣地，雖然頁面仍然一片空白，我們卻可以在 Console 看到被印出的 `Hello world!` 字串。
+
+### External Script
+
+和 Internal Script 相似，External Script 同樣會在 `<head>` 或 `<body>` 裡嵌入 `<script>` 標籤，但和 Internal Script 不同的是，External Script 會把 JavaScript 的程式碼拆分到副檔名為 `.js` 的檔案裡，再透過「引入」的方式導進 HTML 使用，藉此拆分 HTML 與 JavaScript 原始碼，讓檔案依照其功能好好分類，而不是全部都塞在 HTML 裡面。
+
+所以依照前面的例子，我們會把 `console.log('Hello world!')` 放在一個新的 `introduction.js` 檔案裡（這個檔案可以任意命名）：
+
+```js
+// introduction.js
+console.log("Hello world!");
+```
+
+然後在新的 `external-script.html` 中，引入 `introduction.js`：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>30DaysOfJavaScript:External script</title>
+    <script src="introduction.js"></script>
+  </head>
+  <body></body>
+</html>
+```
+
+同樣地，`<script>` 也可以放在 HTML 的 `<body>` 標籤內：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>30DaysOfJavaScript:External script</title>
+  </head>
+  <body>
+    <script src="introduction.js"></script>
+  </body>
+</html>
+```
+
+這兩個方式都可以在 Console 裡看到 `Hello world!` 被印出來。
+
+### Multiple External Scripts
+
+一份 HTML 不只可以引入一份 `.js` 檔案，我們可以針對不同的功能需求，引入多份 External Script，所要做的僅僅是於 HTML 中再新增 `<script>` 標籤。
+
+承接剛剛的範例，如果我們想在 `external-script.js` 中，再引入一個 `myName.js` 的 JavaScript 檔案：
+
+```js
+// myName.js
+console.log("I am Frank.");
+```
+
+```html
+<!-- external-script.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>30DaysOfJavaScript:External script</title>
+  </head>
+  <body>
+    <script src="./introduction.js"></script>
+    <script src="./myName.js"></script>
+  </body>
+</html>
+```
+
+這時候可以在 Console 看到字串 `Hello world!` 與 `I am Frank.` 相繼被印出。
+
+## JavaScript 中的資料型別（Data Types）
+
+如同其他程式語言，JavaScript 種也有多種資料型別（Data Types），其中資料型別又可分為兩種：
+
+- **基本型別 Primitive Types**
+- **物件型別 Object Types**
+
+（在程式語言中會有大量的英文專有名詞，由於不同的工程師有不同的翻譯方式，為了避免同一英文字詞卻有多種中文翻譯，後續文章將主要使用英文專有名詞。）
+
+### Primitives Type 基本型別
+
+JavaScript 中的 Primitive Types 包含：
+
+- String 字串
+- Number 數字
+- Boolean 布林值（真假值）
+- undefined 未定義
+- Null 空值
+- Symbol 符號
+
+#### Numbers
+
+作為最常見的資料型別之一，Number 又可以再細分成：
+
+- Integer 整數：其中包含了**正整數 Positive Integer**、**負整數 Negative Integer**、**零 Zero**。
+- Float 浮點數：也就是我們熟知的小數，只要任何帶有小數點的數字都是 Float，像是 0.0 也是浮點數。
+
+```js
+// integers
+-3,
+  -2,
+  -1,
+  0,
+  1,
+  2,
+  3 -
+    // float
+    3.5,
+  -2.25,
+  -1.0,
+  0.0,
+  1.1,
+  2.2,
+  3.5;
+```
+
+#### Strings
+
+String 應該更熟悉不過了，任何字元（Character）被夾在雙引號（single quotes）、單引號（double quotes）、反引號（backticks），都可以被視為 String。
+
+```js
+// 使用 single quotes
+"I am a string.";
+
+// 使用 double quotes
+"This is also a string."// 使用 backticks
+`String string string!`;
+```
+
+#### Booleans
+
+Boolean 布林值又可以被稱作「真假值」，因為 boolean 只有 `true` 真值與 `false` 假值，非真即假非假即真。
+
+```js
+true;
+false;
+```
+
+#### Undefined
+
+在 JavaScript 中，如果沒有給變數（variable）進行賦值（assign a value），此時該變數的值會是 `undefined`。此外，如果一個函數沒有返回（return）任何值，它也會返回 `undefined`。
+
+```js
+let firstName;
+console.log(firstName); // undefined，因為還沒有賦值
+```
+
+#### Null
+
+`null` 代表的是「空值」，而在 JavaScript 或是其他的程式語言中，`null` 跟 `undefined` 是有所區別的，`null` 像是說「**沒有東西**」，而 `undefined` 則像是說「**不知道這個東西是什麼**」，在語意上有明顯的區別。
+
+```js
+// 我們可以將一個變數賦值為 null 空值
+let emptyValue = null;
+```
+
+### 如何判別資料型別？
