@@ -341,7 +341,7 @@ String 應該更熟悉不過了，任何字元（Character）被夾在雙引號�
 "I am a string.";
 
 // 使用 double quotes
-"This is also a string."// 使用 backticks
+"This is also a string." // 使用 backticks
 `String string string!`;
 ```
 
@@ -373,3 +373,28 @@ let emptyValue = null;
 ```
 
 ### 如何判別資料型別？
+
+在 JavaScript 中，我們可以透過內建關鍵字（keyword） `typeof` 來確認變數或值的資料型態為何。
+
+```js
+console.log(typeof "Frank"); // string
+console.log(typeof 5); // number
+console.log(typeof true); // boolean
+console.log(typeof null); // object type
+console.log(typeof undefined); // undefined
+```
+
+> 這邊補充一個小知識：有時候可能會看到其他人寫成 `typeof(123)` 確認其資料型態，但我們前面有說過，`typeof` 其實是一個關鍵字，而不是內建函式（built-in function），所以這邊 `typeof()` 裡面的 `123` 也並非引數（argument），實際上這邊的小括號 `()` 有跟沒有是沒有差別的，也就是說 `typeof(123)` 跟 `typeof 123` 是完全等價的內容。
+
+## 變數是什麼？
+
+在程式語言中，我們使用變數 variable 來儲放想要放入的值 value，換成生活化的例子，變數可以視作一個塑膠盒，我們可以在塑膠盒裡面放入各種想放進去的物品，可以放入雞腿、青菜，也可以放入充電線、電池等各種東西，而這些變數會被記錄在記憶體內，等到我們需要使用時，程式會從記憶體中找出這些變數，接續進行後續的運算。
+
+在 JavaScript 中，當我們要想要儲放值在一個變數時，我們首先需要進行**宣告 declare**，透過關鍵字如：`var`、`let`、`const` 完成變數宣告後，才能接續變數的賦值，我們可以把宣告想像成「為塑膠盒貼上姓名標籤，好讓我們（記憶體）知道這是一個變數與它的名稱」。
+
+早期 JavaScript 其實只能使用 `var` 進行變數宣告，然而透過 `var` 宣告的變數會造成一些問題，像是變數提升 hoisting（這個之後會再提到），為了解決最初語言設計上的缺陷，所以新增了 `let` 與 `const` 兩個用於變數宣告的關鍵字。
+
+- `let` 所宣告的變數，後續可以重新賦值，覆蓋最初的值。
+- `const` 所宣告的變數，裡面的值是「不可以」再修改，所以通常會常數 constant 的宣告。（例如：圓周率固定是 3.14，所以我們可以 `const PI = 3.14`）
+
+> 對於初學者來說，可以無腦理解成優先使用 `const` 進行變數宣告，如果遇到跳錯（像是要改變變數的值，也就是重新賦值），再把 `const` 改成 `let` 即可。但就是不要使用 `var` 做宣告，更重要的是，**千萬不要沒宣告就使用變數**。
